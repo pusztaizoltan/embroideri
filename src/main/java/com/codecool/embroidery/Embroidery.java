@@ -10,8 +10,10 @@ public class Embroidery {
 //        System.out.print("\n");
 //        int[][] rectangle = drawRectangle(8, 6, 2, 1, 2);
 //        printShape(rectangle);
-        int[][] triangle = drawTriangle(6, 1, 3);
-        printShape(triangle);
+//        int[][] triangle = drawTriangle(6, 1, 3);
+//        printShape(triangle);
+        int[][] christmasTree = drawChristmasTree(5, 1, 0);
+        printShape(christmasTree);
     }
     private static int[][] drawRectangle(int width, int height){
         return drawRectangle(width, height, 0, 1, 0);
@@ -73,9 +75,29 @@ public class Embroidery {
         }
         return triangle;
     }
-
+    private static int[][] drawChristmasTree(int blocks){
+        return drawChristmasTree(blocks, 1, 1);
+    }
     private static int[][] drawChristmasTree(int blocks, Integer borderColor, Integer fillColor) {
-        return new int[0][0];
+        int triangleHeight = blocks + 2;
+        int treeHeight = blocks * 3;
+        int[][] triangle = Embroidery.drawTriangle(triangleHeight, borderColor, fillColor);
+        int[][] christmasTree =  new int[treeHeight][triangleHeight*2-1];
+        int j = triangleHeight-1;
+        int step = 0;
+        for (int i = treeHeight-1; i >= 0;) {
+            while (step<3){
+                christmasTree[i] = triangle[j];
+                step++;
+                j--;
+                i--;
+            }
+            step = 0;
+            j += 2;
+        }
+
+        return christmasTree;
+
     }
 
     private static int[][] drawCircle(int radius, Integer borderColor, Integer fillColor) {
