@@ -132,15 +132,18 @@ public class Embroidery {
         return circle;
     }
     private static void printShape(int[][] shape, boolean colors) {
-        if (colors == false) {return printShape(shape);}
+        if (colors == false) {
+            return printShape(shape);
+        }
         for (int i = 0; i < shape.length; i++) {
             System.out.print("  ");
             for (int j = 0; j < shape[0].length; j++) {
 
-                System.out.print(shape[i][j] +"  ");
+                System.out.print(shape[i][j] + "  ");
             }
             System.out.println();
-
+        }
+    }
     private static void printShape(int[][] shape) {
         for (int i = 0; i < shape.length; i++) {
             System.out.print("  ");
@@ -150,16 +153,4 @@ public class Embroidery {
             System.out.println();
         }
     }
-
-    private static void printShape(int[][] shape, boolean colors) {
-        for (int i = 0; i < shape.length; i++) {
-            System.out.print("  ");
-            for (int j = 0; j < shape[0].length; j++) {
-
-                System.out.print(shape[i][j] +"  ");
-            }
-            System.out.println();
-        }
-    }
-
 }
