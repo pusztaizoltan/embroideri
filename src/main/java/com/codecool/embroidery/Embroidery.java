@@ -1,21 +1,49 @@
 package com.codecool.embroidery;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Arrays;
 
 public class Embroidery {
     public static void main(String[] args) {
+
 //        int[][] rectangle0 = drawRectangle(5, 3);
 //        System.out.print("Default rectangle:\n");
 //        printShape(rectangle0);
 //        System.out.print("\n");
-//        int[][] rectangle = drawRectangle(8, 6, 2, 1, 2);
-//        printShape(rectangle);
-//        int[][] triangle = drawTriangle(6, 1, 3);
-//        printShape(triangle);
-//        int[][] christmasTree = drawChristmasTree(5, 1, 0);
-//        printShape(christmasTree);
+        int[][] rectangle = drawRectangle(8, 6, 2, 1, 2);
+        printShape(rectangle);
+        GUI(rectangle);
+
+        int[][] triangle = drawTriangle(6, 1, 3);
+        printShape(triangle);
+        GUI(triangle);
+
+        int[][] christmasTree = drawChristmasTree(5, 1, 3);
+        printShape(christmasTree);
+        GUI(christmasTree);
+
         int[][] circle = drawCircle(4, 6, 3);
         printShape(circle);
+        GUI(circle);
+    }
+    public static void GUI(int[][] graphic) {
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel = new JPanel();
+        frame.add(panel, BorderLayout.CENTER);
+        frame.setPreferredSize(new Dimension(400, 600));
+        JTextArea txtA = new JTextArea();
+        panel.add(txtA);
+        frame.pack();
+        frame.setVisible(true);
+        for (int i = 0; i < graphic.length; i++) {
+            System.out.print("  ");
+            for (int j = 0; j < graphic[0].length; j++) {
+                txtA.append(graphic[i][j] + "  ");
+            }
+            txtA.append("\n");
+        }
     }
     private static int[][] QdrawRectangle(int width, int height){
         return drawRectangle(width, height, 0, 1, 0);
@@ -25,7 +53,6 @@ public class Embroidery {
         int lesserLength = Math.min(width,height);
         if (borderWidth * 2 >= lesserLength){
             borderWidth = (int) (lesserLength-1) / 2;
-            // todo: szövegnél színezést felkiáltójel és új szám piros
             System.out.print("\n" +
                     "!! Border setting is too high. The border\n" +
                     "!! won't fit into the specified rectangle,\n" +
@@ -130,19 +157,6 @@ public class Embroidery {
             }
         }
         return circle;
-    }
-    private static void printShape(int[][] shape, boolean colors) {
-        if (colors == false) {
-            return printShape(shape);
-        }
-        for (int i = 0; i < shape.length; i++) {
-            System.out.print("  ");
-            for (int j = 0; j < shape[0].length; j++) {
-
-                System.out.print(shape[i][j] + "  ");
-            }
-            System.out.println();
-        }
     }
     private static void printShape(int[][] shape) {
         for (int i = 0; i < shape.length; i++) {
