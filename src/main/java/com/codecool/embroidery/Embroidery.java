@@ -12,10 +12,12 @@ public class Embroidery {
 //        printShape(rectangle);
 //        int[][] triangle = drawTriangle(6, 1, 3);
 //        printShape(triangle);
-        int[][] christmasTree = drawChristmasTree(5, 1, 0);
-        printShape(christmasTree);
+//        int[][] christmasTree = drawChristmasTree(5, 1, 0);
+//        printShape(christmasTree);
+        int[][] circle = drawCircle(4, 6, 3);
+        printShape(circle);
     }
-    private static int[][] drawRectangle(int width, int height){
+    private static int[][] QdrawRectangle(int width, int height){
         return drawRectangle(width, height, 0, 1, 0);
     }
     private static int[][] drawRectangle(int width, int height, Integer borderColor, Integer fillColor, Integer borderWidth) {
@@ -84,33 +86,80 @@ public class Embroidery {
         int[][] triangle = Embroidery.drawTriangle(triangleHeight, borderColor, fillColor);
         int[][] christmasTree =  new int[treeHeight][triangleHeight*2-1];
         int j = triangleHeight-1;
-        int step = 0;
+        int blockrow = 1;
         for (int i = treeHeight-1; i >= 0;) {
-            while (step<3){
+            while (blockrow < 4){
                 christmasTree[i] = triangle[j];
-                step++;
+                blockrow++;
                 j--;
                 i--;
             }
-            step = 0;
+            blockrow = 1;
             j += 2;
         }
 
         return christmasTree;
 
     }
-
-    private static int[][] drawCircle(int radius, Integer borderColor, Integer fillColor) {
-        return new int[0][0];
+    private static int[][] drawCircle(int radius){
+        return drawCircle(radius, 1, 1);
     }
+    private static int[][] drawCircle(int radius, Integer borderColor, Integer fillColor) {
+        int[][] circle = new int[radius*2+1][radius*2+1];
+        for (int i = radius; i >= 0; i--) { //y coordinate
+            for (int j = radius; j < radius*2+1; j++) { //x coordinate
+                int calcualtedR2 = (j-radius)*(j-radius) + (radius-i)*(radius-i);
+                boolean circleInside = calcualtedR2 < (radius-1)*(radius-1)+1;
+                boolean circleBorder = calcualtedR2 <= (radius)*(radius)+1;
+                if (circleInside) {
+                    circle[i][j] = fillColor.intValue();
+                    circle[2*radius-i][j] = fillColor.intValue();
+                    circle[i][radius*2-j] = fillColor.intValue();
+                    circle[2*radius-i][radius*2-j] = fillColor.intValue();
+                }else if(circleBorder){
+                    circle[i][j] = borderColor.intValue();
+                    circle[2*radius-i][j] = borderColor.intValue();
+                    circle[i][radius*2-j] = borderColor.intValue();
+                    circle[2*radius-i][radius*2-j] = borderColor.intValue();
+                } else {
+                    circle[i][j] = 0;
+                    circle[2*radius-i][j] = 0;
+                    circle[i][radius*2-j] = 0;
+                    circle[2*radius-i][radius*2-j] = 0;
+                }
+            }
+        }
+        return circle;
+    }
+    private static void printShape(int[][] shape, boolean colors) {
+        if (colors == false) {return printShape(shape);}
+        for (int i = 0; i < shape.length; i++) {
+            System.out.print("  ");
+            for (int j = 0; j < shape[0].length; j++) {
+
+                System.out.print(shape[i][j] +"  ");
+            }
+            System.out.println();
 
     private static void printShape(int[][] shape) {
         for (int i = 0; i < shape.length; i++) {
             System.out.print("  ");
             for (int j = 0; j < shape[0].length; j++) {
-                System.out.print(shape[i][j] +" ");
+                System.out.print(shape[i][j] +"  ");
             }
             System.out.println();
         }
     }
+
+    private static void printShape(int[][] shape, boolean colors) {
+        for (int i = 0; i < shape.length; i++) {
+            System.out.print("  ");
+            for (int j = 0; j < shape[0].length; j++) {
+
+                System.out.print(shape[i][j] +"  ");
+            }
+            System.out.println();
+        }
+    }
+
 }
