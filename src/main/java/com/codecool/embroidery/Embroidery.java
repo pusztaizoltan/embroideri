@@ -10,7 +10,7 @@ public class Embroidery {
 //        int[][] rectangle0 = drawRectangle(5, 3);
 //        System.out.print("Default rectangle:\n");
 //        printShape(rectangle0);
-//        System.out.print("\n");
+
         int[][] rectangle = drawRectangle(8, 6, 2, 1, 2);
         printShape(rectangle);
         GUI(rectangle);
@@ -86,7 +86,6 @@ public class Embroidery {
         }
         return rectangle;
     }
-
     private static int[][] drawTriangle(int height){
         return drawTriangle(height, 1, 1);
     }
@@ -159,8 +158,8 @@ public class Embroidery {
         return circle;
     }
     private static void printShape(int[][] shape) {
+        System.out.println();
         for (int i = 0; i < shape.length; i++) {
-            System.out.print("  ");
             for (int j = 0; j < shape[0].length; j++) {
                 System.out.print(shape[i][j] +"  ");
             }
